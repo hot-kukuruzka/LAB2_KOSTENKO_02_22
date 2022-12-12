@@ -10,7 +10,7 @@ char signs[7] = "+-*%^|&";
 char b_signs[3] = "^|&";
 
 int main() {
-    char *str = NULL, *end;
+    char *str = NULL;
     size_t n = 0;
     getline(&str, &n, stdin);
 
@@ -18,7 +18,7 @@ int main() {
         char num[strlen(str) - 2];
         memmove(&num[0], &str[1], strlen(str) - 2);
         int radix = def_of_radix(num);
-        long int number = _strtol(num, &end, radix);
+        long int number = _strtol(num, radix);
 
         if (radix == 0) {
             printf("Ошибка: попробуйте ввести другое число");
@@ -39,8 +39,8 @@ int main() {
                 memmove(&num2[0], &str[i + 1], strlen(str) - i - 1);
                 radix1 = def_of_radix(num1);
                 radix2 = def_of_radix(num2);
-                long int n1 = _strtol(num1, &end, radix1);
-                long int n2 = _strtol(num2, &end, radix2);
+                long int n1 = _strtol(num1, radix1);
+                long int n2 = _strtol(num2, radix2);
 
                 if (radix1 != radix2) {
                     printf("Ошибка: системы счисления не совпадают\n");
