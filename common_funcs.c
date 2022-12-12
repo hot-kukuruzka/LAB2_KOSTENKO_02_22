@@ -32,7 +32,8 @@ int def_of_radix(const char *str) {
 
 long int _strtol(const char *num, int radix) {
     int res = 0, x = 0;
-    for (int i = 0; i < strlen(num); i++) {
+    int n = (num[strlen(num) - 1] == '\n') ? strlen(num) - 1 : strlen(num);
+    for (int i = 0; i < n; i++) {
         switch (num[i]) {
         case '0':
             x = 0;
