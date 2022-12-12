@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "bin.h"
 #include "oct.h"
 #include "hex.h"
@@ -27,6 +28,64 @@ int def_of_radix(const char *str) {
         radix = 2;
     }
     return radix;
+}
+
+long int _strtol(const char *num, int radix) {
+    int res = 0, x = 0;
+    for (int i = 0; i < strlen(num); i++) {
+        switch (num[i]) {
+        case '0':
+            x = 0;
+            break;
+        case '1':
+            x = 1;
+            break;
+        case '2':
+            x = 2;
+            break;
+        case '3':
+            x = 3;
+            break;
+        case '4':
+            x = 4;
+            break;
+        case '5':
+            x = 5;
+            break;
+        case '6':
+            x = 6;
+            break;
+        case '7':
+            x = 7;
+            break;
+        case '8':
+            x = 8;
+            break;
+        case '9':
+            x = 9;
+            break;
+        case 'a':
+            x = 10;
+            break;
+        case 'b':
+            x = 11;
+            break;
+        case 'c':
+            x = 12;
+            break;
+        case 'd':
+            x = 13;
+            break;
+        case 'e':
+            x = 14;
+            break;
+        case 'f':
+            x = 15;
+            break;
+        }
+        res = res * radix + x;
+    }
+    return res;
 }
 
 void get_result(const int radix, const long int result) {
