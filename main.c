@@ -135,7 +135,7 @@ int main() {
                 return 0;
             }
         }
-      printf("error");
+        printf("error");
     }
     free(str);
     return 0;
