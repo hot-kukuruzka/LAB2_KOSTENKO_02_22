@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void bin(const int number) {
     int num = (number < 0) ? -number : number; 

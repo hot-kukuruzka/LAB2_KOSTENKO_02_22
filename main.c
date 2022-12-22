@@ -6,8 +6,9 @@
 #include "hex.h"
 #include "common_funcs.h"
 
-char signs[7] = "+-*%^|&";
-char b_signs[3] = "^|&";
+char signs[7] = "~+-*%^|&";
+char b_signs[3] = "~^|&";
+char hex_symbols[16] = "0123456789abcdef";
 
 int main() {
     char *str = NULL;
@@ -23,8 +24,8 @@ int main() {
         if (radix == 0) {
             printf("Ошибка: попробуйте ввести другое число");
             return 0;
-        } else if (number < 0) {
-            printf("Ошибка: введите положительное число");
+        } else if (strchr(num, '-') != NULL) {
+            printf("error");
             return 0;
         }
         get_result(radix, ~number);
@@ -34,24 +35,76 @@ int main() {
                 char num1[i - 1];
                 char num2[strlen(str) - i - 1];
                 char sign = str[i];      
+                if (i == strlen(str) - 2) {
+                    printf("error");
+                    return 0;
+                }
                 int radix1, radix2;
                 memmove(&num1[0], &str[0], i - 1);
                 memmove(&num2[0], &str[i + 1], strlen(str) - i - 1);
+                if (strchr(b_signs, sign) != NULL && (strchr(num1, '-') != NULL || strchr(num2, '-') != NULL)) {
+                    printf("error");
+                    return 0;
+                }
                 radix1 = def_of_radix(num1);
                 radix2 = def_of_radix(num2);
+                
                 long int n1 = _strtol(num1, radix1);
                 long int n2 = _strtol(num2, radix2);
 
                 if (radix1 != radix2) {
                     printf("Ошибка: системы счисления не совпадают\n");
-                    printf("%i %i", radix1, radix2);
                     return 0;
                 } else if (radix1 == 0) {
                     printf("Ошибка: попробуйте ввести другое число");
                     return 0;
-                } else if (strchr(b_signs, sign) != NULL && (n1 < 0 || n2 < 0)) {
-                    printf("Ошибка: введите положительное число");
-                    return 0;
+                }
+                if (radix1 == 2) {
+                    for (; i < strlen(num1); i++) {
+                        if (num1[i] >= '0' && num1[i] <= '1') {
+                            continue;
+                        } else {
+                            printf("error");
+                            return 0;
+                        }
+                    }
+                    for (; i < strlen(num2); i++) {
+                        if (num2[i] >= '0' && num2[i] <= '1') {
+                            continue;
+                        } else {
+                            printf("error");
+                            return 0;
+                        }
+                    }
+                } else if (radix1 == 8) {
+                    for (; i < strlen(num1); i++) {
+                        if (num1[i] >= '0' && num1[i] <= '7') {
+                            continue;
+                        } else {
+                            printf("error");
+                            return 0;
+                        }
+                    }
+                    for (; i < strlen(num2); i++) {
+                        if (num2[i] >= '0' && num2[i] <= '7') {
+                            continue;
+                        } else {
+                            printf("error");
+                            return 0;
+                        }
+                    }
+                } else if (radix == 16) {
+                    for (; i < strlen(number); i++) {
+                        if ((number[i] >= '0' && number[i] <= '9') ||
+                            (number[i] >= 'A' && number[i] <= 'F') ||
+                            (number[i] >= 'a' && number[i] <= 'f')
+                                ) {
+                            continue;
+                        } else {
+                            printf("error");
+                            return 0;
+                        }
+                    }
                 }
 
                 long int res;
@@ -79,9 +132,12 @@ int main() {
                         break;
                 }          
                 get_result(radix1, res);
+                return 0;
             }
         }
+      printf("error");
     }
     free(str);
     return 0;
 }
+
