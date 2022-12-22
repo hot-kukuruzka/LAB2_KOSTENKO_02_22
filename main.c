@@ -8,7 +8,6 @@
 
 char signs[7] = "~+-*%^|&";
 char b_signs[3] = "~^|&";
-char hex_symbols[16] = "0123456789abcdef";
 
 int main() {
     char *str = NULL;
