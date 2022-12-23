@@ -6,8 +6,8 @@
 #include "hex.h"
 #include "common_funcs.h"
 
-char signs[7] = "~+-*%^|&";
-char b_signs[3] = "~^|&";
+char signs[8] = "~+-*%^|&";
+char b_signs[4] = "~^|&";
 
 int main() {
     char *str = NULL;
@@ -92,12 +92,21 @@ int main() {
                             return 0;
                         }
                     }
-                } else if (radix == 16) {
-                    for (; i < strlen(number); i++) {
-                        if ((number[i] >= '0' && number[i] <= '9') ||
-                            (number[i] >= 'A' && number[i] <= 'F') ||
-                            (number[i] >= 'a' && number[i] <= 'f')
-                                ) {
+                } else if (radix1 == 16) {
+                    for (; i < strlen(num1); i++) {
+                        if ((num1[i] >= '0' && num1[i] <= '9') ||
+                            (num1[i] >= 'A' && num1[i] <= 'F') ||
+                            (num1[i] >= 'a' && num1[i] <= 'f')) {
+                            continue;
+                        } else {
+                            printf("error");
+                            return 0;
+                        }
+                    }
+                    for (; i < strlen(num2); i++) {
+                        if ((num2[i] >= '0' && num2[i] <= '9') ||
+                            (num2[i] >= 'A' && num2[i] <= 'F') ||
+                            (num2[i] >= 'a' && num2[i] <= 'f')) {
                             continue;
                         } else {
                             printf("error");
